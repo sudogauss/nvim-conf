@@ -1,4 +1,4 @@
-{
+return {
     "neovim/nvim-lspconfig",
     opts = function()
         ---@class PluginLspOpts

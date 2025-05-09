@@ -64,3 +64,21 @@ install_luarocks () {
     cd luarocks-3.11.1/ && ./configure && make && sudo make install || exit_with_error "failed to build and install luarocks" $build_err_code
     rm luarocks-3.11.1
 }
+
+# Install Node, generally needed for some UI imrovements
+install_node () {
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash || exit_with_error "failed to fetch Node" $pkg_install_fail_err_code
+    \. "$HOME/.nvm/nvm.sh" || exit_with_error "failed to install Node manager" $?
+    nvm install 22
+}
+
+# ===== LSP SERVERS =====
+
+install_python_lsp_server () {
+    sudo apt update && sudo apt install python3 python3-pip || exit_with_error "failed to install python and pip" $pkg_install_fail_err_code
+    pip3 install pyright --break-system-packages || exit_with_error "failed to install pyright lsp server system wide" $pkg_install_fail_err_code
+}
+
+# ===== Plugins =====
+
+install_nvim_plugins () {}
